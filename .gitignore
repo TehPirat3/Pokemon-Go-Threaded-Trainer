@@ -5,7 +5,7 @@ bin/Debug/
 
 obj/x86/Debug/
 
-packages\.config
+packages/
 
 Pokemon Go Threaded Trainer\.csproj
 
@@ -14,3 +14,11 @@ Pokemon Go Threaded Trainer\.csproj\.user
 Pokemon Go Threaded Trainer\.sln
 
 Properties/
+
+\.vs/
+
+
+
+packages\.config
+
+PokemonGo\.RocketAPI
