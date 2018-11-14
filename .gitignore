@@ -1,0 +1,16 @@
+
+App\.config
+
+bin/Debug/
+
+obj/x86/Debug/
+
+packages\.config
+
+Pokemon Go Threaded Trainer\.csproj
+
+Pokemon Go Threaded Trainer\.csproj\.user
+
+Pokemon Go Threaded Trainer\.sln
+
+Properties/
