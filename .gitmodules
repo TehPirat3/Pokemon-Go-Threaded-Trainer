@@ -1,0 +1,3 @@
+[submodule "PokemonGo.RocketAPI"]
+	path = PokemonGo.RocketAPI
+	url = https://github.com/Necrobot-Private/PokemonGo.RocketAPI
