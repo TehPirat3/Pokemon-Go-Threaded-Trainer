@@ -5,7 +5,7 @@ using PokemonGo.RocketAPI.Helpers;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PokemonGoBot.Classes
+namespace Pokemon_Go_Threaded_Trainer.Classes
 {
     public static class Extentions
     {

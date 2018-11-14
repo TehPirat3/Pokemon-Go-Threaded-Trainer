@@ -1,16 +1,9 @@
-﻿using PokemonGo.RocketAPI.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PokemonGoBot
+namespace Pokemon_Go_Threaded_Trainer.Forms
 {
     public partial class Setup : Form
     {
@@ -29,7 +22,7 @@ namespace PokemonGoBot
             }
 
             //var data = Main.data;
-            Data data = new Data();
+            /*Data data = new Data();
             Main.id++;
             CancellationTokenSource cts = new CancellationTokenSource();
             data.AuthType = authType.Text == "Ptc" ? AuthType.Ptc : AuthType.Google;
@@ -48,7 +41,7 @@ namespace PokemonGoBot
             data.EvolveAllGivenPokemons = evolve.Checked;
             data.CurrentLevel = -1;
             data.GoogleRefreshToken = string.Empty;
-            data.token = cts;
+            data.token = cts;*/
             Main.clientData.Add(Main.id, null);
             completed = true;
             Close();

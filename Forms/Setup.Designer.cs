@@ -1,4 +1,4 @@
-﻿namespace PokemonGoBot
+﻿namespace Pokemon_Go_Threaded_Trainer.Forms
 {
     partial class Setup
     {

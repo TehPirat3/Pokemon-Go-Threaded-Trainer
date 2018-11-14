@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PokemonGoBot
+namespace Pokemon_Go_Threaded_Trainer.Forms
 {
     public partial class About : Form
     {

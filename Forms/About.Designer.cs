@@ -1,4 +1,4 @@
-﻿namespace PokemonGoBot
+﻿namespace Pokemon_Go_Threaded_Trainer.Forms
 {
     partial class About
     {
@@ -42,7 +42,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::PokemonGoBot.Properties.Resources.pirate_profile;
+            this.pictureBox1.Image = global::Pokemon_Go_Threaded_Trainer.Properties.Resources.pirate_profile;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(150, 150);

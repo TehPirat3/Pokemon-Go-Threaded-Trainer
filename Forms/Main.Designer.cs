@@ -1,4 +1,4 @@
-﻿namespace PokemonGoBot
+﻿namespace Pokemon_Go_Threaded_Trainer.Forms
 {
     partial class Main
     {
@@ -90,8 +90,8 @@
             // 
             // richTextBox4
             // 
-            this.richTextBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.richTextBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox4.BackColor = System.Drawing.Color.Black;
             this.richTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;

@@ -1,12 +1,12 @@
-﻿using PokemonGo.RocketAPI.Exceptions;
-using PokemonGoBot.Interfaces;
+﻿using Pokemon_Go_Threaded_Trainer.Forms;
+using Pokemon_Go_Threaded_Trainer.Interfaces;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PokemonGoBot.Classes
+namespace Pokemon_Go_Threaded_Trainer.Classes
 {
     public class TrainerInstance
     {
@@ -39,23 +39,6 @@ namespace PokemonGoBot.Classes
                     //data.thread = new Thread(() => Execute(id));
                     {
                         if (data.token.Token.IsCancellationRequested) return;
-                        try
-                        {
-                            ///Main.Execute(id);
-                            //data.thread.Start();
-                        }
-                        catch (PtcOfflineException)
-                        {
-                            _log.Log_(id, Color.Red, $"[{DateTime.Now.ToString("HH:mm:ss")}] PTC Servers are probably down OR your credentials are wrong.");
-                           /// errors++;
-                            Main.getBots--;
-                        }
-                        catch (Exception ex)
-                        {
-                            _log.Log_(id, Color.Red, $"[{DateTime.Now.ToString("HH:mm:ss")}] Unhandled exception: {ex}");
-                           /// errors++;
-                            Main.getBots--;
-                        }
                     }, data.token.Token);
                     startControl.Text = "Stop";
                 }
@@ -89,14 +72,14 @@ namespace PokemonGoBot.Classes
             {
                 int id = int.Parse(((Button)s).Parent.Name);
                 var data = Main.getClientData[id];
-                Bag bg = new Bag();
-                bg.client = data.client;
-                bg.Show();
+                //Bag bg = new Bag();
+                //bg.client = data.client;
+                //bg.Show();
                 ((Button)s).Enabled = false;
-                bg.FormClosed += new FormClosedEventHandler(delegate (Object q, FormClosedEventArgs w)
+                /*bg.FormClosed += new FormClosedEventHandler(delegate (Object q, FormClosedEventArgs w)
                 {
                     ((Button)s).Enabled = true;
-                });
+                });*/
             });
             bag.Enabled = false;
             gb.Controls.Add(bag);
@@ -111,14 +94,14 @@ namespace PokemonGoBot.Classes
             {
                 int id = int.Parse(((Button)s).Parent.Name);
                 var data = Main.getClientData[id];
-                Pokemon pk = new Pokemon();
-                pk.client = data.client;
-                pk.Show();
+                //Pokemon pk = new Pokemon();
+                //pk.client = data.client;
+                //pk.Show();
                 ((Button)s).Enabled = false;
-                pk.FormClosed += new FormClosedEventHandler(delegate (Object q, FormClosedEventArgs w)
+                /*pk.FormClosed += new FormClosedEventHandler(delegate (Object q, FormClosedEventArgs w)
                 {
                     ((Button)s).Enabled = true;
-                });
+                });*/
             });
             pokemon.Enabled = false;
             gb.Controls.Add(pokemon);

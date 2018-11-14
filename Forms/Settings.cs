@@ -1,5 +1,4 @@
-﻿using PokemonGo.RocketAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PokemonGoBot
+namespace Pokemon_Go_Threaded_Trainer.Forms
 {
-    public partial class Journal : Form
+    public partial class Settings : Form
     {
-        public Client client { get; set; }
-        public Journal()
+        public Settings()
         {
             InitializeComponent();
-        }
-
-        private void Journal_Load(object sender, EventArgs e)
-        {
-            
         }
     }
 }

@@ -4,7 +4,7 @@ using PokemonGo.RocketAPI.Enums;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PokemonGoBot.Interfaces
+namespace Pokemon_Go_Threaded_Trainer.Interfaces
 {
     public interface IConfig : ISettings
     {
