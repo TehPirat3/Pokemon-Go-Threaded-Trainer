@@ -1,4 +1,4 @@
-﻿using POGOProtos.Inventory.Item;
+﻿///using POGOProtos.Inventory.Item;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
@@ -39,6 +39,21 @@ namespace PokemonGoBot
         private readonly IWeak _weak;
         private readonly ILevel _level;
         public static FlowLayoutPanel panel;
+
+        public static Dictionary<int, IConfig> getClientData
+        {
+            get { return clientData; }
+        }
+        public static FlowLayoutPanel getFlowLayoutPanel
+        {
+            get { return panel; }
+            set { panel = value; }
+        }
+        public static int getBots
+        {
+            get { return bots; }
+            set { bots = value; }
+        }
 
         public Main()
         {
@@ -113,7 +128,8 @@ namespace PokemonGoBot
             setup.FormClosed += new FormClosedEventHandler(delegate (Object o, FormClosedEventArgs a)
             {
                 if (setup.completed == false) return;
-                GroupBox gb = new GroupBox();
+
+                /**GroupBox gb = new GroupBox();
                 gb.Size = new Size(395, 165);
                 gb.Name = id.ToString();
                 gb.Parent = flow;
@@ -264,7 +280,9 @@ namespace PokemonGoBot
                 con.ReadOnly = true;
                 con.Name = $"console{id}";
                 con.Parent = gb;
-                gb.Controls.Add(con);
+                gb.Controls.Add(con);*/
+
+                GroupBox gb = new TrainerInstance().CreateInstance(id);
                 flow.Controls.Add(gb);
             });
         }
@@ -280,21 +298,21 @@ namespace PokemonGoBot
                 {
                     case AuthType.Ptc:
                         _log.Log_(id, Color.Green, "Attempting to log into Pokemon Trainers Club..");
-                        await client.Login.DoPtcLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword);
+                        //await client.Login.DoPtcLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword);
                         break;
                     case AuthType.Google:
                         _log.Log_(id, Color.Green, "Attempting to log into Google..");
                         if (ClientSettings.GoogleRefreshToken == "")
                             _log.Log_(id, Color.Green, "Now opening www.Google.com/device");// and copying the 8 digit code to your clipboard");
 
-                        await client.Login.DoGoogleLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword);
+                        //await client.Login.DoGoogleLogin(ClientSettings.PtcUsername, ClientSettings.PtcPassword);
                         break;
                 }
                 //await client.SetServer();
-                await client.Player.UpdatePlayerLocation(ClientSettings.DefaultLatitude, ClientSettings.DefaultLongitude, ClientSettings.DefaultAltitude);
-                var profile = await client.Player?.GetPlayer();
+              ///  await client.Player.UpdatePlayerLocation(ClientSettings.DefaultLatitude, ClientSettings.DefaultLongitude, ClientSettings.DefaultAltitude, 3);
+               /// var profile = await client.Player?.GetPlayer();
                 //var settings = await client.GetSettings();
-                var mapObjects = await client.Map.GetMapObjects();
+               /// var mapObjects = await client.Map.GetMapObjects();
                 //var inventory = await client.Inventory.GetInventory();
 
                 //var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonData).Where(p => p != null && p?.PokemonId > 0);
@@ -315,25 +333,25 @@ namespace PokemonGoBot
                 _log.Log_(id, Color.DarkGray, "Longitude: " + ClientSettings.DefaultLongitude);
                 _log.Log_(id, Color.Yellow, "----------------------------");
                 _log.Log_(id, Color.DarkGray, "Your Account:\n");
-                _log.Log_(id, Color.DarkGray, "Name: " + profile.PlayerData.Username);
-                _log.Log_(id, Color.DarkGray, "Team: " + profile.PlayerData.Team);
-                _log.Log_(id, Color.DarkGray, "Stardust: " + profile.PlayerData.Currencies.ToArray()[1].Amount);
+              ///  _log.Log_(id, Color.DarkGray, "Name: " + profile.PlayerData.Username);
+              ///  _log.Log_(id, Color.DarkGray, "Team: " + profile.PlayerData.Team);
+              ///  _log.Log_(id, Color.DarkGray, "Stardust: " + profile.PlayerData.Currencies.ToArray()[1].Amount);
 
                 _log.Log_(id, Color.Cyan, "Farming Started");
                 _log.Log_(id, Color.Yellow, "----------------------------");
                 switch (ClientSettings.TransferType)
                 {
                     case "leaveStrongest":
-                        await _strong.TransferAllButStrongestUnwantedPokemon(client, id);
+                       /// await _strong.TransferAllButStrongestUnwantedPokemon(client, id);
                         break;
                     case "all":
                         //await _transfer.TransferAllGivenPokemons(id, client, pokemons);
                         break;
                     case "duplicate":
-                        await _duplicate.TransferDuplicatePokemon(client, id);
+                       /// await _duplicate.TransferDuplicatePokemon(client, id);
                         break;
                     case "cp":
-                        await _weak.TransferAllWeakPokemon(client, ClientSettings.TransferCPThreshold, id);
+                       /// await _weak.TransferAllWeakPokemon(client, ClientSettings.TransferCPThreshold, id);
                         break;
                     default:
                         _log.Log_(id, Color.DarkGray, "Transfering pokemon disabled");
@@ -345,12 +363,12 @@ namespace PokemonGoBot
                 //if (ClientSettings.Recycler)
                   //client.RecycleItems(client, id);
 
-                await Task.Delay(5000);
+                ///await Task.Delay(5000);
                 _level.PrintLevel(client, id);
-                await _farm.ExecuteFarmingPokestopsAndPokemons(client, id);
-                await _catch.ExecuteCatchAllNearbyPokemons(client, id);
+               /// await _farm.ExecuteFarmingPokestopsAndPokemons(client, id);
+                ///await _catch.ExecuteCatchAllNearbyPokemons(client, id);
                 _log.Log_(id, Color.Red, $"No nearby usefull locations found. Please wait 10 seconds.");
-                await Task.Delay(10000);
+               /// await Task.Delay(10000);
                 //CheckVersion();
                 Execute(id);
             }
@@ -371,7 +389,7 @@ namespace PokemonGoBot
         }
     }
 
-    public class Data : IConfig
+    public class Data/// : IConfig
     {
         public AuthType AuthType { get; set; }
         public string PtcUsername { get; set; }
@@ -387,7 +405,7 @@ namespace PokemonGoBot
         public string TransferType { get; set; }
         public int TransferCPThreshold { get; set; }
         public bool EvolveAllGivenPokemons { get; set; }
-        ICollection<KeyValuePair<ItemId, int>> IConfig.ItemRecycleFilter
+        /*ICollection<KeyValuePair<ItemId, int>> IConfig.ItemRecycleFilter
         {
             get
             {
@@ -410,7 +428,7 @@ namespace PokemonGoBot
             {
                 throw new NotImplementedException();
             }
-        }
+        }*/
         public int RecycleItemsInterval { get; set; }
         public string Language { get; set; }
 
@@ -420,5 +438,503 @@ namespace PokemonGoBot
         public int CurrentLevel { get; set; }
         public string AccessToken { get; set; }
         public Client client { get; set; }
+
+        public string Password
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Username
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DevicePlatform
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DeviceId
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string AndroidBoardName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string AndroidBootloader
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DeviceBrand
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DeviceModel
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DeviceModelIdentifier
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DeviceModelBoot
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string HardwareManufacturer
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string HardwareModel
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string FirmwareBrand
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string FirmwareTags
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string FirmwareType
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string FirmwareFingerprint
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool UseProxy
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool UseProxyAuthentication
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UseProxyHost
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UseProxyPort
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UseProxyUsername
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UseProxyPassword
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool UsePogoDevHashServer
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UrlHashServices
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string EndPoint
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool UseCustomAPI
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string AuthAPIKey
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool DisplayVerboseLog
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool AutoExitBotIfAccountFlagged
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public double AccountLatitude
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public double AccountLongitude
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool AccountActive
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Country
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string TimeZone
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string POSIX
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public double RunStart
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public double RunEnd
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public class ItemId
+        {
+        }
     }
 }

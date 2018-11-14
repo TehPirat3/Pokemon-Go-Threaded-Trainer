@@ -28,7 +28,7 @@ namespace PokemonGoBot.Classes
 
             foreach (var pokemon in pokemons)
             {
-                var update = await client.Player.UpdatePlayerLocation(pokemon.Latitude, pokemon.Longitude, 10);
+                client.Player.UpdatePlayerLocation(pokemon.Latitude, pokemon.Longitude, 10, 3);
                 var encounterPokemonResponse = await client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
                 var pokemonCP = encounterPokemonResponse?.WildPokemon?.PokemonData?.Cp;
                 CatchPokemonResponse caughtPokemonResponse;

@@ -67,7 +67,7 @@ namespace PokemonGoBot.Classes
                     //{
                         console.Invoke((MethodInvoker)delegate ()
                         {
-                        console.Text = string.Format(player.PlayerData.Username + " | Level {0:0} - ({1:0} / {2:0}) | Stardust {3:0}", v.Level, (v.Experience - v.PrevLevelXp - XpDiff), (v.NextLevelXp - v.PrevLevelXp - XpDiff), player.PlayerData.Currencies.ToArray()[1].Amount);
+                        console.Text = string.Format(player.PlayerData.Username + " | Level {0:0} - ({1:0} / {2:0}) | Stardust {3:0}", v.Level, (v.Experience - v.PrevLevelXp - XpDiff), (v.NextLevelXp - v.PrevLevelXp - XpDiff), player.PlayerData.CurrencyBalance);
                         });
                     //}
                     //else console.Text = string.Format(Username + " | Level {0:0} - ({1:0} / {2:0}) | Stardust {3:0}", v.Level, (v.Experience - v.PrevLevelXp - XpDiff), (v.NextLevelXp - v.PrevLevelXp - XpDiff), profile.Profile.Currency.ToArray()[1].Amount);

@@ -43,9 +43,9 @@ namespace PokemonGoBot
                     .Where(p => p != null && p?.PokemonId > 0)
                     .OrderByDescending(key => key.Cp);
             var families = inventory.InventoryDelta.InventoryItems
-                .Select(i => i.InventoryItemData?.PokemonFamily)
-                .Where(p => p != null && (int)p?.FamilyId > 0)
-                .OrderByDescending(p => (int)p.FamilyId);
+                .Select(i => i.InventoryItemData?.PokemonData)
+                .Where(p => p != null && (int)p?.PokemonId > 0)
+                .OrderByDescending(p => (int)p.PokemonId);
 
             var imageList = new ImageList { ImageSize = new Size(50, 50) };
             listView1.ShowItemToolTips = true;
@@ -62,8 +62,8 @@ namespace PokemonGoBot
 
 
                 var currentCandy = families
-                    .Where(i => (int)i.FamilyId <= (int)pokemon.PokemonId)
-                    .Select(f => f.Candy)
+                    .Where(i => (int)i.PokemonId <= (int)pokemon.PokemonId)
+                    .Select(f => f.BuddyCandyAwarded)
                     .First();
                 var currIv = Math.Round(Perfect(pokemon));
                 //listViewItem.SubItems.Add();

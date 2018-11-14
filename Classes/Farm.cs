@@ -28,7 +28,7 @@ namespace PokemonGoBot.Classes
 
             foreach (var pokeStop in pokeStops)
             {
-                var update = await client.Player.UpdatePlayerLocation(pokeStop.Latitude, pokeStop.Longitude, 10);
+                client.Player.UpdatePlayerLocation(pokeStop.Latitude, pokeStop.Longitude, 10, 3);
                 var fortInfo = await client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 

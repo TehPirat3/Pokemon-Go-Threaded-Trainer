@@ -49,7 +49,7 @@ namespace PokemonGoBot
             data.CurrentLevel = -1;
             data.GoogleRefreshToken = string.Empty;
             data.token = cts;
-            Main.clientData.Add(Main.id, data);
+            Main.clientData.Add(Main.id, null);
             completed = true;
             Close();
         }
